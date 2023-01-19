@@ -31,3 +31,18 @@ void Game::generateNewWord()
         qDebug() << word;
     }
 }
+
+bool Game::checkIfWordExist(QString)
+{
+
+}
+
+bool Game::checkIfWordCorrect(QString)
+{
+
+}
+
+void Game::clear()
+{
+
+}

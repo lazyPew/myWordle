@@ -3,5 +3,8 @@
         <file>main.qml</file>
         <file>qtquickcontrols2.conf</file>
         <file>words.txt</file>
+        <file>LetterBox.qml</file>
+        <file>MainPage.qml</file>
+        <file>WordPane.qml</file>
     </qresource>
 </RCC>
