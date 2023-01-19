@@ -19,7 +19,7 @@ set(HEADERS
     )
 
 set(DISTFILES
-    qml.qrc
+    qrc/qml.qrc
     .gitignore
     )
 

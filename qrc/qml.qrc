@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>words.txt</file>
+        <file>Components/LetterBox.qml</file>
+        <file>Components/WordPane.qml</file>
+        <file>MainElements/MainHeader.qml</file>
+        <file>MainElements/MainPage.qml</file>
+    </qresource>
+    <qresource prefix="/Icons">
+        <file>Icons/exit.png</file>
+    </qresource>
+</RCC>
