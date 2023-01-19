@@ -20,41 +20,44 @@ Page {
 //    }
 
     contentItem: ColumnLayout{
+        Layout.fillHeight: true
+        Layout.fillWidth: true
 
         Repeater{
-            model:6
+            model: game.wordTries
             RowLayout{
+                property string word: modelData
+
+                Label{
+                    text: word
+                }
                 Layout.alignment: Qt.AlignHCenter
                 Repeater{
-                model: 5
+                model:5// parent.modelData.size()
                     LetterBox{
+//                        letter: modelData
                     }
                 }
             }
         }
-        Layout.fillHeight: true
-        Layout.fillWidth: true
-        Repeater{
-//            model:Repeater{
-//                model: 5
-                    LetterBox{
-                    }
-//            }
+
+        InputPanel {
+            id: inputPanel
+            z: 99
+            visible: active
+            active: game.tryNumber < game.maxNumber
+            implicitWidth: parent.width
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
+            Component.onCompleted: {
+                //// -BUG empty locales list
+                //console.log(VirtualKeyboardSettings.availableLocales)
+                VirtualKeyboardSettings.activeLocales = ["ru_RU"];
+                VirtualKeyboardSettings.locale = "ru_RU"
+    //            VirtualKeyboardSettings.activeLocales = ["en_EN"];
+    //            VirtualKeyboardSettings.locale = "en_EN"
+            }
         }
     }
 
-    InputPanel {
-        id: inputPanel
-        z: 99
-        visible: active
-        active: true
-        implicitWidth: parent.width
-        Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
-        Component.onCompleted: {
-            //// -BUG empty locales list
-            //console.log(VirtualKeyboardSettings.availableLocales)
-            VirtualKeyboardSettings.activeLocales = ["ru_RU",/*"en_EN"*/];
-            VirtualKeyboardSettings.locale = "ru_RU"//"en_EN"//"British English"
-        }
-    }
+    // TODO create own keyboard???
 }

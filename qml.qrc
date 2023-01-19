@@ -6,5 +6,9 @@
         <file>LetterBox.qml</file>
         <file>MainPage.qml</file>
         <file>WordPane.qml</file>
+        <file>MainHeader.qml</file>
+    </qresource>
+    <qresource prefix="/Icons">
+        <file>exit.png</file>
     </qresource>
 </RCC>

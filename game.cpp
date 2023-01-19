@@ -3,9 +3,14 @@
 
 Game::Game(QObject *parent)
     : QObject(parent)
-
+    , _tryNumber(0)
+    , _maxNumber(6)
+    , _wordTries{QStringList{}}
 {
     generateNewWord();
+
+    connect(this, &Game::shutdownNow,
+            this, &Game::shutdown, Qt::QueuedConnection);
 }
 
 void Game::generateNewWord()
@@ -21,28 +26,41 @@ void Game::generateNewWord()
     QTextStream in(&file);
     in.setCodec("UTF-8");
     QVector<QString> wordVect;
+
     while (!in.atEnd()) {
         QString line = in.readLine();
         wordVect << line;
     }
-    QRandomGenerator gen;
-    for (int i = 0; i < 10; i++){
-        QString word = wordVect[gen.bounded(wordVect.size())];
-        qDebug() << word;
+
+    for (int i = 0; i < maxNumber(); i++){
+//        QString word = wordVect[QRandomGenerator::global()->bounded(wordVect.size())];
+        _wordTries.append(wordVect[QRandomGenerator::global()->bounded(wordVect.size())]);
+        qDebug() << wordTries();
     }
 }
 
-bool Game::checkIfWordExist(QString)
-{
+void Game::clear(){
 
 }
 
-bool Game::checkIfWordCorrect(QString)
-{
+bool Game::checkIfWordExist(QString){
 
 }
 
-void Game::clear()
-{
+bool Game::checkIfWordCorrect(QString){
 
+}
+
+void Game::shutdown(int returnCode){
+    qDebug() << "shutdown";
+    QString command("kill ");
+    command.append(QString::number(QCoreApplication::applicationPid()));
+    system(qPrintable(command));
+    QCoreApplication::exit(returnCode);
+}
+
+
+void Game::turnOff(){
+    int exitCode = 201;
+    emit shutdownNow(exitCode);
 }

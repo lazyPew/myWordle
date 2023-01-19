@@ -1,5 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
 #include "game.h"
 
 int main(int argc, char *argv[])
@@ -12,7 +13,8 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
     
-    Game game;
+    Game* game = new Game();
+    engine.rootContext()->setContextProperty("game", game);
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;

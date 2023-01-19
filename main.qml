@@ -6,9 +6,17 @@ import QtQuick.Controls.Material 2.2
 ApplicationWindow {
     id: window
     visible: true
-    width: 640
-    height: 640
-    title: qsTr("Scroll")
+
+    maximumHeight: 640
+    maximumWidth: 640
+
+    minimumHeight: 640
+    minimumWidth: 640
+
+    header: MainHeader{
+        id: mainHeader
+        titleIsChangeble: false
+    }
 
     MainPage {
         id: mainPage
