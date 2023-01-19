@@ -9,7 +9,23 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt5 COMPONENTS Core Quick REQUIRED)
+set(SOURCES
+    main.cpp
+    game.cpp
+    )
 
-add_executable(${PROJECT_NAME} "main.cpp" "qml.qrc")
+set(HEADERS
+    game.h
+    )
 
-target_link_libraries(${PROJECT_NAME} Qt5::Core Qt5::Quick)
+set(DISTFILES
+    qml.qrc
+    .gitignore
+    )
+
+add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS} ${DISTFILES})
+
+target_link_libraries(${PROJECT_NAME}
+    Qt5::Core
+    Qt5::Quick
+    )
