@@ -5,19 +5,22 @@ Game::Game(QObject *parent)
     : QObject(parent)
     , _tryNumber(0)
     , _maxNumber(6)
-    , _wordTries{QStringList{}}
+    , _wordsModel{nullptr}
+//    , _wordTries{QStringList{}}
 {
     generateNewWord();
 
     connect(this, &Game::shutdownNow,
             this, &Game::shutdown, Qt::QueuedConnection);
+    registerQmlTypes();
 }
 
 void Game::generateNewWord()
 {
+    _wordTries = QStringList{};
     QFile file(":/words.txt");
     if(file.exists()){
-        // TODO crete warning that program needs file with words
+        // TODO make warning that program needs file with words
     }
     if(!file.open(QFile::ReadOnly | QFile::Text)){
         qDebug() << "error opening file";
@@ -32,10 +35,16 @@ void Game::generateNewWord()
         wordVect << line;
     }
 
+    QString word = wordVect[QRandomGenerator::global()->bounded(wordVect.size())];
+    _wordsModel = new WordsModel(word);
+
     for (int i = 0; i < maxNumber(); i++){
-//        QString word = wordVect[QRandomGenerator::global()->bounded(wordVect.size())];
         _wordTries.append(wordVect[QRandomGenerator::global()->bounded(wordVect.size())]);
-        qDebug() << wordTries();
+//        qDebug() << wordTries();
+//        qDebug() << word;
+    }
+    for(auto s: _wordTries){
+        _wordsModel->guessWord(s);
     }
 }
 
@@ -51,6 +60,18 @@ bool Game::checkIfWordCorrect(QString){
 
 }
 
+void Game::registerQmlTypes()
+{
+    static bool registered = false;
+    if (!registered) {
+        qmlRegisterUncreatableType<WordClass>(
+                    "DataModels",
+                    1, 0,
+                    "WordClass", "NOPE"
+                    );
+        registered = true;
+    }
+}
 void Game::shutdown(int returnCode){
     qDebug() << "shutdown";
     QString command("kill ");

@@ -12,10 +12,12 @@ find_package(Qt5 COMPONENTS Core Quick REQUIRED)
 set(SOURCES
     main.cpp
     game.cpp
+    wordsmodel.cpp
     )
 
 set(HEADERS
     game.h
+    wordsmodel.h
     )
 
 set(DISTFILES

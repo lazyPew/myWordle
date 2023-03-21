@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QQuickItem>
 
+#include "wordsmodel.h"
+
 class Game : public QObject
 {
     Q_OBJECT
@@ -14,16 +16,18 @@ class Game : public QObject
 
     Q_PROPERTY(QString currentTry READ currentTry CONSTANT)
     Q_PROPERTY(QStringList wordTries READ wordTries CONSTANT)
+    Q_PROPERTY(WordsModel* wordsModel READ wordsModel CONSTANT)
 
 public:
     explicit Game(QObject *parent = nullptr);
 
 public slots:
-    QString currentWord() const         { return _currentWord; }
-    int tryNumber() const               { return _tryNumber; }
-    int maxNumber() const               { return _maxNumber; }
-    QString currentTry() const          { return _currentTry; }
-    QStringList wordTries() const       { return _wordTries; }
+    QString currentWord() const     { return _currentWord; }
+    int tryNumber() const           { return _tryNumber; }
+    int maxNumber() const           { return _maxNumber; }
+    QString currentTry() const      { return _currentTry; }
+    QStringList wordTries() const   { return _wordTries; }
+    WordsModel* wordsModel() const  { return _wordsModel; }
 
     void generateNewWord();
     void clear();
@@ -36,6 +40,7 @@ signals:
     void shutdownNow(int returnCode);
 
 private:
+    void registerQmlTypes();
     void shutdown(int returnCode);
 
 private:
@@ -45,6 +50,8 @@ private:
 
     QString _currentTry;
     QStringList _wordTries;
+
+    WordsModel* _wordsModel;
 };
 
 #endif // GAME_H

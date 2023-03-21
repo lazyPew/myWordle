@@ -25,7 +25,7 @@ ToolBar {
         spacing: 10
 
         ToolButton{
-            icon.source: "/Icons/exit"
+            icon.source: "/Icons/Icons/exit"
             font.pixelSize: root.height/2
             onClicked: game.turnOff()
         }

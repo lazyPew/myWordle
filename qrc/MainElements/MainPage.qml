@@ -5,59 +5,73 @@ import QtQuick.Controls.Material 2.3
 import QtQuick.VirtualKeyboard 2.2
 import QtQuick.VirtualKeyboard.Settings 2.2
 
+import "../Components"
+
 Page {
     id: root
-
-//    WordPane{
-//        id: wordPane
-//        implicitHeight: parent.height - inputPanel.height
-////        Layout.fillHeight: true
-//        Layout.fillWidth: true
-//    }
-//    ListView{
-//        id:view
-//        width: parent.width
-//    }
 
     contentItem: ColumnLayout{
         Layout.fillHeight: true
         Layout.fillWidth: true
 
-        Repeater{
-            model: game.wordTries
-            RowLayout{
-                property string word: modelData
+//        ListView {
+//            id: view
+//            model: game.wordsModel
+//            height: parent.height
+//            width: parent.width
+//            clip: true
+//            spacing: 20
+//            delegate: DiskDelegate {
+//                width: parent.width - (scroll.width*3)
+//                height: 80
 
-                Label{
-                    text: word
-                }
+//            }
+//        }
+
+        Repeater{
+            model: game.wordsModel.wordTries
+            RowLayout{
+                property var word: getArray(modelData)
+
                 Layout.alignment: Qt.AlignHCenter
                 Repeater{
-                model:5// parent.modelData.size()
+                    model:5
                     LetterBox{
-//                        letter: modelData
+                        letter: word[modelData]
+                        correctness: word
                     }
                 }
             }
+//            Component.onCompleted:
         }
 
-        InputPanel {
-            id: inputPanel
-            z: 99
-            visible: active
-            active: game.tryNumber < game.maxNumber
-            implicitWidth: parent.width
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
-            Component.onCompleted: {
-                //// -BUG empty locales list
-                //console.log(VirtualKeyboardSettings.availableLocales)
-                VirtualKeyboardSettings.activeLocales = ["ru_RU"];
-                VirtualKeyboardSettings.locale = "ru_RU"
-    //            VirtualKeyboardSettings.activeLocales = ["en_EN"];
-    //            VirtualKeyboardSettings.locale = "en_EN"
-            }
-        }
+
+        // TODO create own keyboard???
+
+//        InputPanel {
+//            id: inputPanel
+//            z: 99
+//            visible: active
+//            active: game.tryNumber < game.maxNumber
+//            implicitWidth: parent.width
+//            Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
+//            Component.onCompleted: {
+//                //// -BUG empty locales list
+//                //console.log(VirtualKeyboardSettings.availableLocales)
+//                VirtualKeyboardSettings.activeLocales = ["ru_RU"];
+//                VirtualKeyboardSettings.locale = "ru_RU"
+//    //            VirtualKeyboardSettings.activeLocales = ["en_EN"];
+//    //            VirtualKeyboardSettings.locale = "en_EN"
+//            }
+//        }
     }
 
-    // TODO create own keyboard???
+    function getArray(str){
+        var arr = []
+        for (var i = 0; i < str.length; i++) {
+            arr.push(str.charAt(i))
+        }
+        console.log(arr)
+        return arr
+    }
 }
