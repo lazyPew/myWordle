@@ -14,40 +14,28 @@ Page {
         Layout.fillHeight: true
         Layout.fillWidth: true
 
-//        ListView {
-//            id: view
-//            model: game.wordsModel
-//            height: parent.height
+        ListView {
+            id: view
+            model: game.wordsModel
+            Layout.fillHeight: true
+//            height: parent.height/5 * 3
 //            width: parent.width
-//            clip: true
-//            spacing: 20
-//            delegate: DiskDelegate {
-//                width: parent.width - (scroll.width*3)
-//                height: 80
-
-//            }
-//        }
-
-        Repeater{
-            model: game.wordsModel.wordTries
-            RowLayout{
-                property var word: getArray(modelData)
-
-                Layout.alignment: Qt.AlignHCenter
-                Repeater{
-                    model:5
-                    LetterBox{
-                        letter: word[modelData]
-                        correctness: word
-                    }
-                }
+//            Layout.alignment: Qt.AlignHCenter
+            spacing: 20
+            delegate: WordPane{
+                word: wordRole
+                letters: lettersRole
             }
-//            Component.onCompleted:
         }
-
-
+        Item{
+            Layout.fillHeight: true
+        }
         // TODO create own keyboard???
 
+        CustomKeyboard{
+            id: keyboard
+            width: parent.width
+        }
 //        InputPanel {
 //            id: inputPanel
 //            z: 99

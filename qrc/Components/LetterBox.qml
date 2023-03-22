@@ -10,12 +10,18 @@ Rectangle {
 
     implicitWidth: 60
     implicitHeight: 60
-    color: correctness == WordClass.LetterCorrect
-           ? "green"
-           : correctness == WordClass.LetterInAnotherPlace
-             ? "yellow"
-             : "transparent"
-    border.color: "white"
+    color:
+//        correctness == WordClass.LetterCorrect
+//           ? "green"
+//           : correctness == WordClass.LetterInAnotherPlace
+//             ? "orange"
+//             :
+               "transparent"
+    border.color: correctness == WordClass.LetterCorrect
+                  ? "green"
+                  : correctness == WordClass.LetterInAnotherPlace
+                    ? "orange"
+                    : "white"
     border.width: 5
     radius: 15
 

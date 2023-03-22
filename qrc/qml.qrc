@@ -7,6 +7,7 @@
         <file>Components/WordPane.qml</file>
         <file>MainElements/MainHeader.qml</file>
         <file>MainElements/MainPage.qml</file>
+        <file>Components/CustomKeyboard.qml</file>
     </qresource>
     <qresource prefix="/Icons">
         <file>Icons/exit.png</file>

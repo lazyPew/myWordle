@@ -6,7 +6,6 @@ Game::Game(QObject *parent)
     , _tryNumber(0)
     , _maxNumber(6)
     , _wordsModel{nullptr}
-//    , _wordTries{QStringList{}}
 {
     generateNewWord();
 

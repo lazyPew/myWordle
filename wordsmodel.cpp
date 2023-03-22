@@ -16,6 +16,7 @@ WordClass::WordClass(QString str, QString correctWord)
 
 bool WordClass::checkLetters(QString correctWord)
 {
+    // TODO think about words with same letters
     qDebug() << _str;
     for(int i = 0; i < _str.length(); i++){
         if(correctWord.at(i) == _str.at(i)){
